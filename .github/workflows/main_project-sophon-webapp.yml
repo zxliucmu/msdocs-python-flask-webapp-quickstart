@@ -22,15 +22,15 @@ jobs:
     - name: Log in to registry
       uses: docker/login-action@v2
       with:
-        registry: https://mcr.microsoft.com/
-        username: ${{ secrets.AzureAppService_ContainerUsername_54eae39095bd4001a93ed22fcc87ba0a }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_715038b7c73048909833e1acfa8a5c30 }}
+        registry: https://sophon.azurecr.io/
+        username: ${{ secrets.AzureAppService_ContainerUsername_a353e5e85afc415db8a8f3c2585961f3 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_8b41dbf8f2bb4725b18e950a64cd9fd5 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_54eae39095bd4001a93ed22fcc87ba0a }}/appsvc/staticsite:${{ github.sha }}
+        tags: sophon.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_a353e5e85afc415db8a8f3c2585961f3 }}/sophon-demo:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'project-sophon-webapp'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_6ba9c84deae64ca0858058e8ec2608b5 }}
-        images: 'mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_54eae39095bd4001a93ed22fcc87ba0a }}/appsvc/staticsite:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_67541bdd58314936b842a411ffd4db44 }}
+        images: 'sophon.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_a353e5e85afc415db8a8f3c2585961f3 }}/sophon-demo:${{ github.sha }}'
